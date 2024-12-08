@@ -44,6 +44,15 @@ if ($vsCodeVersion -like "*Microsoft Visual Studio Code*") {
     }
 }
 
+# Open VS Code silently and then close it to ensure it's properly set up
+try {
+    Start-Process -FilePath "code" -ArgumentList "-n"
+    Start-Sleep -Seconds 10  # Wait for VS Code to start
+    Stop-Process -Name "Code"
+} catch {
+    Write-Output "Failed to open or close Visual Studio Code. Please ensure VS Code is installed and try again."
+}
+
 # Function to check if a VS Code extension is installed
 function IsVSCodeExtensionInstalled {
     param (
@@ -53,15 +62,7 @@ function IsVSCodeExtensionInstalled {
     return $installedExtensions -contains $extensionId
 }
 
-# Open VS Code silently and then close it to ensure it's properly set up
-try {
-    Start-Process -FilePath "code" -ArgumentList "-n" -NoNewWindow
-    Start-Sleep -Seconds 10  # Wait for VS Code to start
-    Stop-Process -Name "Code"
-} catch {
-    Write-Output "Failed to open or close Visual Studio Code. Please ensure VS Code is installed and try again."
-    exit
-}
+
 
 # Install and enable PHP Server extension
 $phpServerExtensionId = "brapifra.phpserver"
