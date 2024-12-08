@@ -1,5 +1,5 @@
 # This script can be executed directly from a GitHub URL using the following command:
-# iex ((New-Object System.Net.WebClient).DownloadString(https://raw.githubusercontent.com/Pixllucien/PHP-Installer-for-PMHS/refs/heads/main/PHPInstaller.ps1'))
+# iex (New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/Pixllucien/PHP-Installer-for-PMHS/refs/heads/main/PHPInstaller.ps1')
 # Replace https://raw.githubusercontent.com/Pixllucien/PHP-Installer-for-PMHS/refs/heads/main/PHPInstaller.ps1' with your actual raw script URL.
 
 # License agreement
