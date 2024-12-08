@@ -1,13 +1,11 @@
 # This script can be executed directly from a GitHub URL using the following command:
 # iex (New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/Pixllucien/PHP-Installer-for-PMHS/refs/heads/main/PHPInstaller.ps1')
-# Replace https://raw.githubusercontent.com/Pixllucien/PHP-Installer-for-PMHS/refs/heads/main/PHPInstaller.ps1' with your actual raw script URL.
 
 # License agreement
 $licenseAgreement = @"
 This script is free to use. By using this script, you agree to acknowledge Pixl_lucien as the author.
 If you continue using this script, it implies that you agree to these terms.
 "@
-
 Write-Output $licenseAgreement
 Start-Sleep -Seconds 5  # Wait for 5 seconds
 
@@ -95,13 +93,11 @@ if (IsVSCodeExtensionInstalled -extensionId $phpExtensionsPackExtensionId) {
     }
 }
 
-# Open Readme.txt 
+# Open README.txt and delete it afterwards
 $downloadPath = "https://raw.githubusercontent.com/Pixllucien/PHP-Installer-for-PMHS/refs/heads/main/README.txt"
 $savePath ="$env:TEMP\Readme.txt"
 Invoke-WebRequest -Uri $downloadPath -OutFile $savePath 
-$checkProcess = Start-Process -FilePath "notepad.exe" -ArgumentList $savePath -PassThru
-$checkProcess.WaitForExit() 
 
-if (-Not (Test-Path $checkProcess)) {
-    Remove-Item -Path $savePath -Force 
-}
+$notepadProcess = Start-Process -FilePath "notepad.exe" -ArgumentList $savePath -PassThru
+$notepadProcess.WaitForExit()
+Remove-Item -Path $savePath -Force 
