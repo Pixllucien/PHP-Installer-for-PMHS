@@ -1,1 +1,0 @@
-# PHP-Installer-for-PMHS
