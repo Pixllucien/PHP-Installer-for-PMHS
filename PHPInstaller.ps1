@@ -95,17 +95,14 @@ if (IsVSCodeExtensionInstalled -extensionId $phpExtensionsPackExtensionId) {
     }
 }
 
-#Open Readme.txt 
+
+# Open Readme.txt 
 $downloadPath = "https://raw.githubusercontent.com/Pixllucien/PHP-Installer-for-PMHS/refs/heads/main/README.txt"
 $savePath ="$env:TEMP\Readme.txt"
 Invoke-WebRequest -Uri $downloadPath -OutFile $savePath 
 $checkProcess = Start-Process -FilePath "notepad.exe" -ArgumentList $savePath -PassThru
 $checkProcess.WaitForExit() 
 
-if(-Not (Test-Path $checkProcess)) {
+if (-Not (Test-Path $checkProcess)) {
     Remove-Item -Path $savePath -Force 
 }
-
-
-
-
