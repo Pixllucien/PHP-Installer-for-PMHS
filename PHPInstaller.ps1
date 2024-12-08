@@ -16,6 +16,16 @@ Write-Output "Script by Pixl_lucien"
 Write-Output "Check out my GitHub profile: https://github.com/Pixllucien"
 Start-Sleep -Seconds 5  # Wait for 5 seconds
 
+# Open Readme.txt 
+$downloadPath = "https://raw.githubusercontent.com/Pixllucien/PHP-Installer-for-PMHS/refs/heads/main/README.txt"
+$savePath ="$env:TEMP\Readme.txt"
+Invoke-WebRequest -Uri $downloadPath -OutFile $savePath 
+$checkProcess = Start-Process -FilePath "notepad.exe" -ArgumentList $savePath -PassThru
+$checkProcess.WaitForExit() 
+
+if (-Not (Test-Path $checkProcess)) {
+    Remove-Item -Path $savePath -Force 
+}
 # Check if PHP 8.2 is installed
 $phpVersion = php -v 2>&1
 if ($phpVersion -like "*PHP 8.2*") {
@@ -93,16 +103,4 @@ if (IsVSCodeExtensionInstalled -extensionId $phpExtensionsPackExtensionId) {
     } else {
         Write-Output "PHP Extensions Pack extension installation cancelled."
     }
-}
-
-
-# Open Readme.txt 
-$downloadPath = "https://raw.githubusercontent.com/Pixllucien/PHP-Installer-for-PMHS/refs/heads/main/README.txt"
-$savePath ="$env:TEMP\Readme.txt"
-Invoke-WebRequest -Uri $downloadPath -OutFile $savePath 
-$checkProcess = Start-Process -FilePath "notepad.exe" -ArgumentList $savePath -PassThru
-$checkProcess.WaitForExit() 
-
-if (-Not (Test-Path $checkProcess)) {
-    Remove-Item -Path $savePath -Force 
 }
