@@ -1,6 +1,6 @@
 # This script can be executed directly from a GitHub URL using the following command:
-# iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/username/repo/branch/New%20Text%20Document.ps1'))
-# Replace 'https://raw.githubusercontent.com/username/repo/branch/New%20Text%20Document.ps1' with your actual raw script URL.
+# iex ((New-Object System.Net.WebClient).DownloadString(https://raw.githubusercontent.com/Pixllucien/PHP-Installer-for-PMHS/refs/heads/main/PHPInstaller.ps1'))
+# Replace https://raw.githubusercontent.com/Pixllucien/PHP-Installer-for-PMHS/refs/heads/main/PHPInstaller.ps1' with your actual raw script URL.
 
 # License agreement
 $licenseAgreement = @"
@@ -94,4 +94,18 @@ if (IsVSCodeExtensionInstalled -extensionId $phpExtensionsPackExtensionId) {
         Write-Output "PHP Extensions Pack extension installation cancelled."
     }
 }
+
+#Open Readme.txt 
+$downloadPath = "https://raw.githubusercontent.com/Pixllucien/PHP-Installer-for-PMHS/refs/heads/main/README.txt"
+$savePath ="$env:TEMP\Readme.txt"
+Invoke-WebRequest -Uri $downloadPath -OutFile $savePath 
+$checkProcess = Start-Process -FilePath "notepad.exe" -ArgumentList $savePath -PassThru
+$checkProcess.WaitForExit() 
+
+if(-Not (Test-Path $checkProcess)) {
+    Remove-Item -Path $savePath -Force 
+}
+
+
+
 
